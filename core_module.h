@@ -1,8 +1,6 @@
 #ifndef C99_KERNAL_TRAFFIC_SNIFFER 
 #define C99_KERNAL_TRAFFIC_SNIFFER
 
-#include <stdint.h>
-
 #define LOCKFILE "/var/run/analizer.pid"
 
 #define SNAPSHOW_BUFFER_LENGTH 128
