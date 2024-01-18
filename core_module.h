@@ -7,7 +7,7 @@
 #define MODULE_DEVICE_NAME "/dev/module_device"
 
 #define SNAPSHOW_BUFFER_LENGTH 128
-#define SECOND_GRANULARITY 1
+#define SECOND_GRANULARITY 10
 
 enum command_type {
     COMMAND_TYPE_UNDEFINED = 0,

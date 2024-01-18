@@ -76,6 +76,8 @@ void add_traffic_info(uint32_t ip_v4_addr, uint32_t size)
 
     traffic_snapshot_arr[snapshot_ind].traffic_length += 1;
     traffic_snapshot_arr[snapshot_ind].traffic_size += size;
+
+    printk(MODULE_DMESG_PREFIX "[DEBUG] snapshot was updated");
 }
 
 
@@ -93,7 +95,7 @@ static unsigned int catch_traffic(void *priv, struct sk_buff *skb, const struct 
     saddr = iph->saddr;
     tot_len = iph->tot_len;
 
-    add_packet_info(saddr, tot_len);
+    add_traffic_info(saddr, tot_len);
 
     return NF_ACCEPT;
 }
