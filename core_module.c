@@ -64,18 +64,18 @@ void add_traffic_info(uint32_t ip_v4_addr, uint32_t size)
     }
 
     if (snapshot_ind == next_free_snapshot_ind) {
-        traffic_snapshot_arr[i].timestamp = cur_time;
-        traffic_snapshot_arr[i].ip_v4_addr = ip_v4_addr;
-        traffic_snapshot_arr[i].traffic_length = 0;
-        traffic_snapshot_arr[i].traffic_size = 0;
+        traffic_snapshot_arr[snapshot_ind].timestamp = cur_time;
+        traffic_snapshot_arr[snapshot_ind].ip_v4_addr = ip_v4_addr;
+        traffic_snapshot_arr[snapshot_ind].traffic_length = 0;
+        traffic_snapshot_arr[snapshot_ind].traffic_size = 0;
 
         next_free_snapshot_ind += 1;
 
         printk(MODULE_DMESG_PREFIX "[DEBUG] new snapshot added");
     }
 
-    traffic_snapshot_arr[i].traffic_length += 1;
-    traffic_snapshot_arr[i].traffic_size += size;
+    traffic_snapshot_arr[snapshot_ind].traffic_length += 1;
+    traffic_snapshot_arr[snapshot_ind].traffic_size += size;
 }
 
 
@@ -145,7 +145,7 @@ static struct file_operations module_device_fops = {
 
 struct miscdevice module_device = {
     .minor = MISC_DYNAMIC_MINOR,
-    .name = DEVICE_L2_DATA_FNAME,
+    .name = MODULE_DEVICE_NAME,
     .fops = &module_device_fops,
     .mode = S_IRWXU | S_IWGRP | S_IWOTH | S_IROTH,
 };
@@ -163,7 +163,7 @@ static int __init my_module_init(void) {
     }
 
     traffic_snapshot_arr = (struct traffic_snapshot *)kmalloc(sizeof(struct traffic_snapshot), SNAPSHOW_BUFFER_LENGTH);
-    if (buffer == NULL)
+    if (traffic_snapshot_arr == NULL)
     {
         printk(MODULE_DMESG_PREFIX "kmalloc error");
         return -EFAULT;

@@ -1,7 +1,10 @@
 #ifndef C99_KERNAL_TRAFFIC_SNIFFER 
 #define C99_KERNAL_TRAFFIC_SNIFFER
 
+#include <linux/stddef.h>
+
 #define LOCKFILE "/var/run/analizer.pid"
+#define MODULE_DEVICE_NAME "/dev/module_device"
 
 #define SNAPSHOW_BUFFER_LENGTH 128
 #define SECOND_GRANULARITY 1
